@@ -5,43 +5,35 @@ namespace Graphics {
     Window window;
     ShaderProgram shaderProgram;
 
-    std::vector<Renderer> entities;
 
     int setupGraphics() {
-
         shaderProgram = ShaderProgram("vertexShader.txt", "fragmentShader.txt");
 
-        Renderer a("C:/Users/thoma/Downloads/sillycat.png");
-        Renderer b("C:/Users/thoma/Downloads/unsillycat.png");
-        
-        entities.push_back(a);
-        entities.push_back(b);
+        return 0;
+    }
+
+    int clearScreen() {
+        glClear(GL_COLOR_BUFFER_BIT);
 
         return 0;
     }
 
     int graphicsLoop() {
+        glUseProgram(shaderProgram.Program);
+        glfwSwapBuffers(window.window);
+        glfwPollEvents();
 
-        while (!glfwWindowShouldClose(window.window))
-        {
-            glClear(GL_COLOR_BUFFER_BIT);
-            glUseProgram(shaderProgram.Program);
+        return 0;
+        
+    }
 
-            for (int i = 0; i < entities.size(); i++) {
-                entities[i].draw();
-            }
-
-            entities[1].setVerts(entities[1].getVertsAt(Vector2(-0.01f, 0.01f)));
-
-            glfwSwapBuffers(window.window);
-            glfwPollEvents();
-        }
-
-
-        for (int i = 0; i < entities.size(); i++) {
-            glDeleteTextures(1, &entities[i].texture.texture);
+    int graphicsEnd() {
+        /*
+        for (int i = 0; i < entityManager.entityAmount; i++) {
+            entityManager.entities[i].renderer.Delete();
         }
         shaderProgram.Delete();
+        */
 
         window.Delete();
         return 0;

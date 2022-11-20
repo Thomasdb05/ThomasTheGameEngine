@@ -6,7 +6,6 @@
 #include<GLFW/glfw3.h>
 #include<vector>
 #include "ShaderProgram.h"
-#include "Renderer.h"
 #include "Window.h"
 
 namespace Graphics {
@@ -14,11 +13,14 @@ namespace Graphics {
     extern Window window;
     extern ShaderProgram shaderProgram;
 
-    extern std::vector<Renderer> entities;
+    int clearScreen();
+
+    int setupGraphics();
 
 	int graphicsLoop();
 
-	int setupGraphics();
+    int graphicsEnd();
+
 }
 
 #endif

@@ -12,11 +12,13 @@ public:
 	int height;
 	int colorchannelamount;
 	
-	void setTexture(const char* filepath);
+	void set(const char* filepath);
 
 	Texture(const char* filepath);
 
 	Texture();
+
+	void Delete();
 };
 
 #endif

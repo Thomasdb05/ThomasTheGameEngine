@@ -6,6 +6,16 @@ public:
 	float x;
 	float y;
 
+	Vector2 operator-(Vector2 const& a);
+
+	Vector2 operator+(Vector2 const& a);
+
+	Vector2 operator*(float a);
+
+	void operator+=(Vector2 const& a);
+
+	void operator-=(Vector2 const& a);
+
 	Vector2();
 	Vector2(float X, float Y);
 };

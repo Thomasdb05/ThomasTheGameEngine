@@ -1,13 +1,22 @@
 #ifndef ENTITY_H
 #define ENTITY_H
-
-//#include "Renderer.h"
 #include "Vector2.h"
+#include "Renderer.h"
 
 class Entity {
-	//Renderer renderer;
+public:
+	Renderer renderer;
 	Vector2 position;
-	Vector2 size;
+	float size;
+
+	int loop();
+
+	int setup();
+
+	Entity();
+
+	Entity(const char* filepath);
+
 };
 
 #endif

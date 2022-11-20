@@ -1,20 +1,46 @@
+#include "Entity.h"
 #include "Renderer.h"
 #include<iostream>
 
+void Renderer::render() {
 
-void Renderer::draw() {
+    std::vector<GLfloat> originalverts = Vertices;
+    std::vector<GLfloat> parentadjustedverts;
+
+    // adjust vertices to world positions for drawing
+    if (parent) {
+        setVerts(getWorldVerts());
+    }
 
     glBindTexture(GL_TEXTURE_2D, texture.texture);
     VAO.bind();
 
-    // Draw primitives, number of indices, datatype of indices, index of indices
+    // draw primitives, number of indices, datatype of indices, index of indices
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+    // reset vertices to local positions
+    setVerts(originalverts);
 }
 
 void Renderer::Delete() {
+    texture.Delete();
     VAO.Delete();
     VBO.Delete();
     EBO.Delete();
+}
+
+std::vector<GLfloat> Renderer::getWorldVerts() {
+    std::vector<GLfloat> verts = Vertices;
+
+    for (int i = 0; i < Vertices.size(); i += 4) {
+        verts[i] /= parent->size;
+        verts[i + 1] /= parent->size;
+
+        verts[i] += parent->position.x;
+        verts[i + 1] += parent->position.y;
+    }
+
+    return verts;
 }
 
 std::vector<GLfloat> Renderer::getVertsAt(Vector2 pos) {
@@ -51,7 +77,7 @@ Renderer::Renderer(const char* texpath) {
     EBO.generate(1);
 
     setVerts(Shapes::boxVertices);
-    texture.setTexture(texpath);
+    texture.set(texpath);
 }
 
 Renderer::Renderer() {

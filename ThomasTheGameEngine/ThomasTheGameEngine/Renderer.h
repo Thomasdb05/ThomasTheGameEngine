@@ -8,8 +8,10 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include "Shapes.h"
-#include "Entity.h"
 #include "Vector2.h"
+
+// to fix circular dependency, header added in Entity.cpp
+class Entity;
 
 class Renderer {
 public:
@@ -23,9 +25,13 @@ public:
 
 	Texture texture;
 
+	std::vector<GLfloat> getWorldVerts();
+
 	std::vector<GLfloat> getVertsAt(Vector2 pos);
 
-	void draw();
+	void setTexture(const char* filepath);
+
+	void render();
 
 	void setVerts(std::vector<GLfloat> vertices);
 

@@ -1,7 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Texture.h"
 
-void Texture::setTexture(const char* texpath) {
+void Texture::set(const char* texpath) {
     stbi_set_flip_vertically_on_load(true);
     unsigned char* data = stbi_load(texpath, &width, &height, &colorchannelamount, 0);
 
@@ -23,9 +23,13 @@ void Texture::setTexture(const char* texpath) {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 Texture::Texture(const char* texpath) {
-    setTexture(texpath);
+    set(texpath);
 }
 
 Texture::Texture() {
 
+}
+
+void Texture::Delete() {
+    glDeleteTextures(1, &texture);
 }
