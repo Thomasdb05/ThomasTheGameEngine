@@ -3,8 +3,6 @@
 class MyScene : public Scene {
 public:
     int setup() {
-        Scene::setup();
-
         Entity a("C:/Users/thoma/Downloads/sillycat.png");
         Entity b("C:/Users/thoma/Downloads/unsillycat.png");
            
@@ -15,8 +13,6 @@ public:
     }
 
     int loop() {
-        Scene::loop();
-
         int x = 0;
         int y = 0;
         if (Input::A == Input::held) {

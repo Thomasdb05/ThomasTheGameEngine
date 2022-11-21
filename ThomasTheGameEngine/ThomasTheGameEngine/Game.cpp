@@ -3,7 +3,8 @@
 int Game::loadScene(Scene* newScene) {
 	currentScene = newScene;
 	if (!currentScene->isSetup) {
-		((MyScene*)currentScene)->setup();
+		currentScene->setup();
+		currentScene->isSetup = true;
 	}
 	return 0;
 }
@@ -19,7 +20,7 @@ int Game::setup() {
 }
 
 int Game::loop() {
-	((MyScene*)currentScene)->loop();
+	currentScene->loop();
 	return 0;
 }
 

@@ -9,12 +9,11 @@
 class Scene {
 public:
 	EntityManager entityManager;
-	const std::type_info& sceneType = typeid(this);
 	bool isSetup = false;
 
-	int setup() { isSetup = true; return -1; }
+	virtual int setup() = 0;
 	//for any occasional scene management
-	int loop() { return -1; }
+	virtual int loop() = 0;
 
 
 	int render() { 
