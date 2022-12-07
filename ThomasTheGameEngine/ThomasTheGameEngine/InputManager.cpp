@@ -55,7 +55,6 @@ namespace Input {
 	}
 
 	void initKeys(GLFWwindow* wind) {
-
 		keys.reserve(26);
 		keys.push_back(&A);
 		keys.push_back(&B);

@@ -1,9 +1,9 @@
-#include "Entity.h"
 #include "Renderer.h"
+//Included here to prevent circular dependency
+#include "Entity.h"
 #include<iostream>
 
-void Renderer::render() {
-
+int Renderer::loop() {
     std::vector<GLfloat> originalverts = Vertices;
     std::vector<GLfloat> parentadjustedverts;
 
@@ -20,21 +20,25 @@ void Renderer::render() {
 
     // reset vertices to local positions
     setVerts(originalverts);
+
+    return 0;
 }
 
-void Renderer::Delete() {
+int Renderer::Delete() {
     texture.Delete();
     VAO.Delete();
     VBO.Delete();
     EBO.Delete();
+
+    return 0;
 }
 
 std::vector<GLfloat> Renderer::getWorldVerts() {
     std::vector<GLfloat> verts = Vertices;
 
     for (int i = 0; i < Vertices.size(); i += 4) {
-        verts[i] /= parent->size;
-        verts[i + 1] /= parent->size;
+        verts[i] *= parent->size.x;
+        verts[i + 1] *= parent->size.y;
 
         verts[i] += parent->position.x;
         verts[i + 1] += parent->position.y;
@@ -70,17 +74,22 @@ void Renderer::setVerts(std::vector<GLfloat> vertices) {
     Vertices = vertices;
 }
 
-Renderer::Renderer(const char* texpath) {
+Renderer::Renderer(Entity* Parent, const char* texpath) {
+    //todo: just call constructor
+    parent = Parent;
 
     VAO.generate(1);
     VBO.generate(1);
     EBO.generate(1);
 
     setVerts(Shapes::boxVertices);
+
     texture.set(texpath);
 }
 
-Renderer::Renderer() {
+Renderer::Renderer(Entity* Parent) {
+    parent = Parent;
+
     VAO.generate(1);
     VBO.generate(1);
     EBO.generate(1);

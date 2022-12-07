@@ -4,6 +4,7 @@ namespace Graphics {
 
     Window window;
     ShaderProgram shaderProgram;
+    float b = 0.0f;
 
 
     int setupGraphics() {
@@ -22,19 +23,12 @@ namespace Graphics {
         glUseProgram(shaderProgram.Program);
         glfwSwapBuffers(window.window);
         glfwPollEvents();
-
         return 0;
         
     }
 
     int graphicsEnd() {
-        /*
-        for (int i = 0; i < entityManager.entityAmount; i++) {
-            entityManager.entities[i].renderer.Delete();
-        }
         shaderProgram.Delete();
-        */
-
         window.Delete();
         return 0;
     }

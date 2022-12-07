@@ -2,9 +2,9 @@
 #define SCENE_H
 
 #include"EntityManager.h"
-#include"Entity.h"
 #include"InputManager.h"
 #include<iostream>
+#include"Player.h"
 
 class Scene {
 public:
@@ -16,12 +16,6 @@ public:
 	virtual int loop() = 0;
 
 
-	int render() { 
-		for (int i = 0; i < entityManager.entities.size(); i++) {
-			entityManager.entities[i].renderer.render();
-		}
-		return 0;
-	}
 };
 
 #endif

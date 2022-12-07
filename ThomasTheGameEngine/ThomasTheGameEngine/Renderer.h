@@ -9,14 +9,10 @@
 #include<GLFW/glfw3.h>
 #include "Shapes.h"
 #include "Vector2.h"
+#include "Component.h"
 
-// to fix circular dependency, header added in Entity.cpp
-class Entity;
-
-class Renderer {
+class Renderer : public Component {
 public:
-	Entity* parent;
-
 	vao VAO;
 	vbo VBO;
 	ebo EBO;
@@ -25,21 +21,19 @@ public:
 
 	Texture texture;
 
+	int loop();
+
+	int Delete();
+
 	std::vector<GLfloat> getWorldVerts();
 
 	std::vector<GLfloat> getVertsAt(Vector2 pos);
 
-	void setTexture(const char* filepath);
-
-	void render();
-
 	void setVerts(std::vector<GLfloat> vertices);
 
-	void Delete();
+	Renderer(Entity* Parent, const char* texpath);
 
-	Renderer(const char* texpath);
-
-	Renderer();
+	Renderer(Entity* Parent);
 };
 
 

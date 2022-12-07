@@ -3,34 +3,20 @@
 class MyScene : public Scene {
 public:
     int setup() {
-        Entity a("C:/Users/thoma/Downloads/sillycat.png");
-        Entity b("C:/Users/thoma/Downloads/unsillycat.png");
+        Player* a = new Player();
            
-        entityManager.addEntity(a);
-        entityManager.addEntity(b);
+        entityManager.addEntity(this, a, Vector2(0.0f, 1.0f));
+        a->size = Vector2(0.3f, 0.3f);
 
+        Player* b = new Player();
+        b->isP2 = true;
+        b->size = Vector2(0.3f, 0.3f);
+        b->size = Vector2(3, 1);
+        entityManager.addEntity(this, b, Vector2(0.0f, -0.5f));
         return 0;
     }
 
     int loop() {
-        int x = 0;
-        int y = 0;
-        if (Input::A == Input::held) {
-            x = -1;
-        }
-        else if (Input::D == Input::held) {
-            x = 1;
-        }
-
-        if (Input::W == Input::held) {
-            y = 1;
-        }
-        else if (Input::S == Input::held) {
-            y = -1;
-        }
-
-        entityManager.entities[1].position += Vector2(x, y) * 0.01f;
         return 0;
-
     }
 };

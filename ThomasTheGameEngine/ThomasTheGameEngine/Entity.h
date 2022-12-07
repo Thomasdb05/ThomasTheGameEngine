@@ -1,21 +1,37 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "Vector2.h"
+//components
 #include "Renderer.h"
+#include "Collider.h"
+#include "PhysicsBody.h"
+
+#include "Flags.h"
+#include<iostream>
+#include<algorithm>
+
+class Scene;
 
 class Entity {
 public:
-	Renderer renderer;
-	Vector2 position;
-	float size;
 
-	int loop();
+	std::vector<Component*> components;
+	Scene* scene;
 
-	int setup();
+	Vector2 position = Vector2(0.0f, 0.0f);
+	Vector2 size = Vector2(1.0f, 1.0f);
+	int flag = -1;
+	bool isSetup = false;
 
-	Entity();
+	virtual int loop() = 0;
 
-	Entity(const char* filepath);
+	virtual int setup() = 0;
+
+	Component* addComponent(Component* component);
+
+	int handleComponents();
+
+	
 
 };
 

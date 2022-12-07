@@ -6,10 +6,8 @@
 #include"Game.h"
 
 namespace AppManager {
-
+	extern Game game;
 	int main();
-
-
 }
 
 #endif

@@ -1,9 +1,9 @@
 #include"AppManager.h"
 
+Game game;
 
 int main()
 {
-    Game game;
 
     Graphics::window.createWindow();
     Graphics::setupGraphics();
@@ -12,12 +12,13 @@ int main()
     while (!glfwWindowShouldClose(Graphics::window.window))
     {
         game.loop();
+        game.sceneloop();
         Input::updateKeys();
 
 
-        Graphics::clearScreen();
-        game.currentScene->render();
         Graphics::graphicsLoop();
+        Graphics::clearScreen();
     }
+    game.end();
     return 0;
 }
